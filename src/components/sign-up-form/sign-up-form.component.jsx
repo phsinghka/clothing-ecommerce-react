@@ -20,10 +20,7 @@ const SignUpForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!displayName || !email || !password || !confirmPassword) {
-      alert("One or more fields are empty.");
-      return;
-    }
+
     if (password != confirmPassword) {
       alert("Password and Confirm Password doesn't Match");
       return;
