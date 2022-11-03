@@ -25,7 +25,16 @@ const SignInForm = () => {
 
       setFormFields(defaultFormFields);
     } catch (error) {
-      console.log(error);
+      switch (error.code) {
+        case "auth/wrong-password":
+          alert("Incorrect Password");
+          break;
+        case "auth/user-not-found":
+          alert("No user associated with this email");
+          break;
+        default:
+          console.log(error);
+      }
     }
   };
 
@@ -61,12 +70,17 @@ const SignInForm = () => {
           value={password}
           name="password"
         />
-        <Button type="submit">SIGN IN</Button>
+        <div className="buttons-container">
+          <Button type="submit">SIGN IN</Button>
+          <Button
+            type="button"
+            onClick={logCurrentUserPopUp}
+            buttonType="google"
+          >
+            Google Sign In
+          </Button>
+        </div>
       </form>
-
-      <Button onClick={logCurrentUserPopUp} buttonType="google">
-        SIGN IN WITH GOOGLE
-      </Button>
     </div>
   );
 };
